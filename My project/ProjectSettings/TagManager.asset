@@ -9,6 +9,7 @@ TagManager:
   - PlayerLeft
   - PlayerRight
   - PlayerMiddle
+  - Switch
   layers:
   - Default
   - TransparentFX

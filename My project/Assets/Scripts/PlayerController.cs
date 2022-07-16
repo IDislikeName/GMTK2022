@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
 
         }
         DeathCheck();
-
+        UpdateCollision();
     }
 
     void MoveTo(Vector3 movementDirection)
@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (colliderFirst.tag == "Box")
         {
-            if (colliderSecond == null)
+            if (colliderSecond == null|| colliderSecond.tag =="Switch")
             {
                 boxToMove = colliderFirst.transform;
                 return true;
@@ -218,5 +218,9 @@ public class PlayerController : MonoBehaviour
             }
         }
         return null;
+    }
+    public void UpdateCollision()
+    {
+
     }
 }
