@@ -5,22 +5,26 @@ using UnityEngine.SceneManagement;
 
 public class SceneMan : MonoBehaviour
 {
-    private static SceneMan _instance;
-
-    public static SceneMan Instance { get { return _instance; } }
-
-
-    private void Awake()
+    #region SingletonDeclaration 
+    public static SceneMan instance;
+    public static SceneMan FindInstance()
     {
-        if (_instance != null && _instance != this)
+        return instance; //that's just a singletone as the region says
+    }
+
+    void Awake() //this happens before the game even starts and it's a part of the singletone
+    {
+        if (instance != null && instance != this)
         {
-            Destroy(this.gameObject);
+            Destroy(this);
         }
-        else
+        else if (instance == null)
         {
-            _instance = this;
+            //DontDestroyOnLoad(this);
+            instance = this;
         }
     }
+    #endregion
     public void Quit()
     {
         Application.Quit();

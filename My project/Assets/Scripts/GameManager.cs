@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager _instance;
-
-    public static GameManager Instance { get { return _instance; } }
-
-
-    private void Awake()
+    #region SingletonDeclaration 
+    public static GameManager instance;
+    public static GameManager FindInstance()
     {
-        if (_instance != null && _instance != this)
+        return instance; //that's just a singletone as the region says
+    }
+
+    void Awake() //this happens before the game even starts and it's a part of the singletone
+    {
+        if (instance != null && instance != this)
         {
-            Destroy(this.gameObject);
+            Destroy(this);
         }
-        else
+        else if (instance == null)
         {
-            _instance = this;
+            //DontDestroyOnLoad(this);
+            instance = this;
         }
     }
+    #endregion
     // Start is called before the first frame update
     void Start()
     {

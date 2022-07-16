@@ -4,23 +4,26 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    private static SoundManager _instance;
-
-    public static SoundManager Instance { get { return _instance; } }
-
-
-    private void Awake()
+    #region SingletonDeclaration 
+    public static SoundManager instance;
+    public static SoundManager FindInstance()
     {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            _instance = this;
-        }
-        
+        return instance; //that's just a singletone as the region says
     }
+
+    void Awake() //this happens before the game even starts and it's a part of the singletone
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(this);
+        }
+        else if (instance == null)
+        {
+            //DontDestroyOnLoad(this);
+            instance = this;
+        }
+    }
+    #endregion
     public AudioSource aud;
     public AudioSource BGM;
     // Start is called before the first frame update
