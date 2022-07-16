@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
+    public int inWorldNumber = 2;
     Transform boxToMove;
     void Awake()
     {
@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
         {
             MoveTo(movementDirection);
         }
+
     }
 
     void MoveTo(Vector3 movementDirection)
@@ -36,18 +37,22 @@ public class PlayerController : MonoBehaviour
         Vector3 inputValue = Vector3.zero;
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
+            GameManager.instance.Save();
             inputValue = Vector3.left;
         }
         else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
+            GameManager.instance.Save();
             inputValue = Vector3.up;
         }
         else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
+            GameManager.instance.Save();
             inputValue = Vector3.right;
         }
         else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
+            GameManager.instance.Save();
             inputValue = Vector3.down;
         }
         return inputValue;
@@ -56,7 +61,22 @@ public class PlayerController : MonoBehaviour
 
     bool CanMove(Vector3 direction)
     {
-        Vector3 positionToCheckFirst = transform.position + direction;
+        Vector3 CurrentPosition = Vector3.zero;
+        if (inWorldNumber == 2)
+        {
+            CurrentPosition = this.transform.position;
+        }
+        else if (inWorldNumber == 1)
+        {
+            CurrentPosition = GameObject.FindGameObjectWithTag("PlayerLeft").transform.position;
+        }
+        else
+        {
+            CurrentPosition = GameObject.FindGameObjectWithTag("PlayerRight").transform.position;
+        }
+
+
+        Vector3 positionToCheckFirst = CurrentPosition + direction;
         Collider2D colliderFirst = GetColliderAt(positionToCheckFirst);
         Vector3 positionToCheckSecond = positionToCheckFirst + direction;
         Collider2D colliderSecond = GetColliderAt(positionToCheckSecond);
@@ -89,6 +109,12 @@ public class PlayerController : MonoBehaviour
             Debug.Log(hit.collider);
         }
         return hit.collider;
+    }
+
+    public void WorldSwitch(int Target)
+    {
+        //这个方法只应该被按钮调用
+        inWorldNumber = Target;
     }
 
 }
