@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
 
     GameObject LeftPlayer;
     GameObject RightPlayer;
+
+    public LayerMask Filter;
     void Awake()
     {
         LeftPlayer = GameObject.FindGameObjectWithTag("PlayerLeft");
@@ -25,6 +27,7 @@ public class PlayerController : MonoBehaviour
             GameManager.instance.Save();
             MoveTo(movementDirection);
             DeathCheck();
+
         }
 
     }
@@ -121,16 +124,20 @@ public class PlayerController : MonoBehaviour
     {
         // 基本思路是从左到右依次check
         // 而且主世界的check如果不通过直接报死亡
+
+        Collider2D GetColliderAtSpecifiedLayer(Vector3 position)
+        {
+            RaycastHit2D hit;
+            hit = Physics2D.CircleCast(position, .3f, Vector3.zero, .3f, Filter);
+            return hit.collider;
+        }
+
         bool DeathCheckBasic(Vector3 position)
         {
-            if (GetColliderAt(position) != null)
+            if (GetColliderAtSpecifiedLayer(position) != null)
             {
-                string temp = GetColliderAt(position).tag;
-                if (temp != "PlayerLeft" && temp != "PlayerMiddle" && temp != "PlayerRight")
-                {
-                    return true;
-                }
-                return false;
+                print(GetColliderAtSpecifiedLayer(position));
+                return true;
             }
             else
             {

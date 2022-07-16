@@ -681,6 +681,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inWorldNumber: 2
+  Filter:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &794300094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4486,7 +4489,7 @@ GameObject:
   - component: {fileID: 1425145505}
   - component: {fileID: 1425145504}
   - component: {fileID: 1425145507}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Square
   m_TagString: Box
   m_Icon: {fileID: 0}
@@ -5058,9 +5061,9 @@ GameObject:
   - component: {fileID: 1669385305}
   - component: {fileID: 1669385304}
   - component: {fileID: 1669385303}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Walls
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
