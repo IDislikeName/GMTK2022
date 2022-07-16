@@ -8,7 +8,6 @@ public class WorldSwitch_Visual : MonoBehaviour
     public GameObject cover2;
     public GameObject cover3;
 
-    public GameObject player;
     int playerStatus;
     // Start is called before the first frame update
     void Start()
@@ -19,7 +18,7 @@ public class WorldSwitch_Visual : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerStatus = player.GetComponent<PlayerController>().inWorldNumber;
+        playerStatus = GameManager.instance.inWorldNumber;
         if (playerStatus == 1)
         {
             cover1.SetActive(false);

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public int inWorldNumber = 2;
     Transform boxToMove;
 
     GameObject LeftPlayer;
@@ -13,8 +12,8 @@ public class PlayerController : MonoBehaviour
     public LayerMask Filter;
     void Awake()
     {
-        LeftPlayer = GameObject.FindGameObjectWithTag("PlayerLeft");
-        RightPlayer = GameObject.FindGameObjectWithTag("PlayerRight");
+        LeftPlayer = findChildWithTag(this.gameObject, "PlayerLeft");
+        RightPlayer = findChildWithTag(this.gameObject, "PlayerRight");
     }
 
     void Update()
@@ -24,11 +23,11 @@ public class PlayerController : MonoBehaviour
         boxToMove = null;
         if (movementDirection != Vector3.zero && CanMove(movementDirection))
         {
-            GameManager.instance.Save();
+            GameManager.instance.SaveElse();
             MoveTo(movementDirection);
-            DeathCheck();
 
         }
+        DeathCheck();
 
     }
 
@@ -67,11 +66,11 @@ public class PlayerController : MonoBehaviour
     bool CanMove(Vector3 direction)
     {
         Vector3 CurrentPosition = Vector3.zero;
-        if (inWorldNumber == 2)
+        if (GameManager.instance.inWorldNumber == 2)
         {
             CurrentPosition = this.transform.position;
         }
-        else if (inWorldNumber == 1)
+        else if (GameManager.instance.inWorldNumber == 1)
         {
             CurrentPosition = LeftPlayer.transform.position;
         }
@@ -112,14 +111,6 @@ public class PlayerController : MonoBehaviour
         return hit.collider;
     }
 
-    public void WorldSwitch(int Target)
-    {
-        //这个方法只应该被按钮调用
-        inWorldNumber = Target;
-
-        DeathCheck();
-    }
-
     void DeathCheck()
     {
         // 基本思路是从左到右依次check
@@ -136,7 +127,6 @@ public class PlayerController : MonoBehaviour
         {
             if (GetColliderAtSpecifiedLayer(position) != null)
             {
-                print(GetColliderAtSpecifiedLayer(position));
                 return true;
             }
             else
@@ -187,7 +177,7 @@ public class PlayerController : MonoBehaviour
             return false;
         }
         
-        switch (inWorldNumber)
+        switch (GameManager.instance.inWorldNumber)
         {
             case 1:
                 DeathCheckMiddle();
@@ -216,4 +206,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    GameObject findChildWithTag(GameObject parent, string tagName)
+    {
+        // 这个方法仅能找到父物体下的第一个有着给定tag的子物体
+        for(int i = 0;i<parent.transform.childCount;i++)
+        {
+            GameObject temp = parent.transform.GetChild(i).gameObject;
+            if (temp.tag == tagName)
+            {
+                return temp;
+            }
+        }
+        return null;
+    }
 }

@@ -6,8 +6,14 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 
-    List<GameObject> InteractiveObjects = new List<GameObject>();
-    Stack<List<GameObject>> ObjectsStacks = new Stack<List<GameObject>>();
+    List<GameObject> InteractiveObjects = new();
+    Stack<List<GameObject>> ObjectsStacks = new();
+    Stack<int> WorldNumberStacks = new();
+    Stack<int> RecallRecords = new();  //这个用来记录每一次回溯时应该回溯动作还是回溯世界
+
+    public int inWorldNumber = 2;
+
+    public string currentLevelName;
 
     #region SingletonDeclaration 
     public static GameManager instance;
@@ -53,7 +59,7 @@ public class GameManager : MonoBehaviour
         InteractiveObjects.Remove(gameObject);
     }
 
-    public void Save()  // 调用这个方法保存当前场上的状态
+    public void SaveElse()  // 调用这个方法保存当前场上的状态
     {
         // 我知道这么写很占内存，蠢的离谱，但是就先这样凑活用吧，还能离咋滴
         List<GameObject> tempList = new List<GameObject>();
@@ -64,26 +70,48 @@ public class GameManager : MonoBehaviour
             tempList.Add(tempObject);
         }
         ObjectsStacks.Push(tempList);
+        RecallRecords.Push(1);
+    }
+
+    public void SaveWorldNumber()
+    {
+        WorldNumberStacks.Push(inWorldNumber);
+        RecallRecords.Push(2);
     }
 
     public void UnDo()
     {
-        if (ObjectsStacks.Count == 0) return;
-        foreach (var item in InteractiveObjects)
+        if (RecallRecords.Count == 0) return;
+        switch (RecallRecords.Pop())
         {
-            Destroy(item);
-        }
-        List<GameObject> tempList = ObjectsStacks.Pop();
-        foreach (var item in tempList)
-        {
-            item.SetActive(true);
+            case 1:
+                foreach (var item in InteractiveObjects)
+                {
+                    Destroy(item);
+                }
+                List<GameObject> tempList = ObjectsStacks.Pop();
+                foreach (var item in tempList)
+                {
+                    item.SetActive(true);
+                }
+                break;
+            case 2:
+                inWorldNumber = WorldNumberStacks.Pop();
+                break;
         }
     }
 
-    //以上实现了Undo，碎碎念：我在做测试的时候碰到了一个奇怪的bug，应该是我undo代码里面出了一些问题，导致最开始的那个角色被移除了。
+    //以上实现了Undo。
 
     void Restart()
     {
-        SceneManager.LoadScene("lv1");
+        SceneManager.LoadScene(currentLevelName);
+    }
+    
+    public void WorldSwitch(int Target)
+    {
+        SaveWorldNumber();
+        //这个方法只应该被按钮调用
+        inWorldNumber = Target;
     }
 }
