@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCotroller : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
 
     Transform boxToMove;
-
     void Awake()
     {
 
