@@ -5,15 +5,32 @@ using UnityEngine.SceneManagement;
 
 public class SceneMan : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private static SceneMan _instance;
 
-    // Update is called once per frame
-    void Update()
+    public static SceneMan Instance { get { return _instance; } }
+
+
+    private void Awake()
     {
-        
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+    public void Quit()
+    {
+        Application.Quit();
+    }
+    public void Start()
+    {
+        SceneManager.LoadScene(1);
+    }
+    public void Menu()
+    {
+        SceneManager.LoadScene(0);
     }
 }

@@ -6,23 +6,19 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
 
-    public static GameManager Instance
+    public static GameManager Instance { get { return _instance; } }
+
+
+    private void Awake()
     {
-        get
+        if (_instance != null && _instance != this)
         {
-            if (_instance == null)
-            {
-                GameObject go = new GameObject("GameManager");
-                go.AddComponent<GameManager>();
-            }
-
-            return _instance;
+            Destroy(this.gameObject);
         }
-    }
-
-    void Awake()
-    {
-        _instance = this;
+        else
+        {
+            _instance = this;
+        }
     }
     // Start is called before the first frame update
     void Start()

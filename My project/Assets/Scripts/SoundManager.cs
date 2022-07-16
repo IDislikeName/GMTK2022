@@ -6,23 +6,20 @@ public class SoundManager : MonoBehaviour
 {
     private static SoundManager _instance;
 
-    public static SoundManager Instance
+    public static SoundManager Instance { get { return _instance; } }
+
+
+    private void Awake()
     {
-        get
+        if (_instance != null && _instance != this)
         {
-            if (_instance == null)
-            {
-                GameObject go = new GameObject("SoundManager");
-                go.AddComponent<SoundManager>();
-            }
-
-            return _instance;
+            Destroy(this.gameObject);
         }
-    }
-
-    void Awake()
-    {
-        _instance = this;
+        else
+        {
+            _instance = this;
+        }
+        DontDestroyOnLoad(gameObject);
     }
     public AudioSource aud;
     public AudioSource BGM;
