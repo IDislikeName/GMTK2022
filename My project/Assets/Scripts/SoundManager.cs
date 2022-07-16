@@ -19,7 +19,7 @@ public class SoundManager : MonoBehaviour
         {
             _instance = this;
         }
-        DontDestroyOnLoad(gameObject);
+        
     }
     public AudioSource aud;
     public AudioSource BGM;
