@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public string currentLevelName;
 
     public bool playerDead = false;
+    public bool playerDeadLegacy = false;
     public bool playerCompleted = false;
 
     public GameObject BackgoundUI;
@@ -58,7 +59,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-
+        playerDeadLegacy = playerDead;
     }
     #endregion
 

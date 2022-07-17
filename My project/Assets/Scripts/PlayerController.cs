@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
 
         }
         DeathCheck();
+
     }
 
     void MoveTo(Vector3 movementDirection)
@@ -190,7 +191,7 @@ public class PlayerController : MonoBehaviour
                 DeathCheckRight();
                 if (DeathCheckLeft())
                 {
-                    GameManager.instance.playerDead = true;  
+                    GameManager.instance.playerDead = true;
                 }
                 break;
             case 2:
@@ -198,7 +199,7 @@ public class PlayerController : MonoBehaviour
                 DeathCheckRight();
                 if (DeathCheckMiddle())
                 {
-                    GameManager.instance.playerDead = true;  
+                    GameManager.instance.playerDead = true;
                 }
                 break;
             case 3:
@@ -206,7 +207,7 @@ public class PlayerController : MonoBehaviour
                 DeathCheckMiddle();
                 if (DeathCheckRight())
                 {
-                    GameManager.instance.playerDead = true;  
+                    GameManager.instance.playerDead = true;
                 }
                 break;
         }

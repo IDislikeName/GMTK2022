@@ -53,7 +53,7 @@ public class WorldSwitch_Visual : MonoBehaviour
         }
         
         // 弹出死亡界面，并在弹出死亡界面时移除右上角的按钮
-        if (GameManager.instance.playerDead)
+        if (GameManager.instance.playerDead && GameManager.instance.playerDeadLegacy)
         {
             deathUI.SetActive(true);
             Buttons.SetActive(false);
