@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     Transform boxToMove;
+    Transform boxToMove2;
 
     GameObject LeftPlayer;
     GameObject RightPlayer;
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
         Vector3 movementDirection = Vector3.zero;
         movementDirection = GetMovementInput();
         boxToMove = null;
+        boxToMove2 = null;
         if (movementDirection != Vector3.zero && CanMove(movementDirection))
         {
             GameManager.instance.SaveElse();
@@ -37,6 +39,10 @@ public class PlayerController : MonoBehaviour
         {
             boxToMove.transform.position += movementDirection;
             SoundManager.instance.PlayClip(SoundManager.instance.boxpush);
+        }
+        if (boxToMove2 != null)
+        {
+            boxToMove2.transform.position += movementDirection;
         }
     }
 
@@ -89,6 +95,8 @@ public class PlayerController : MonoBehaviour
         Collider2D colliderFirst = GetColliderAt(positionToCheckFirst);
         Vector3 positionToCheckSecond = positionToCheckFirst + direction;
         Collider2D colliderSecond = GetColliderAt(positionToCheckSecond);
+        Vector3 positionToCheckThird = positionToCheckSecond + direction;
+        Collider2D colliderThird = GetColliderAt(positionToCheckThird);
         if (colliderFirst == null || colliderFirst.CompareTag("Collectables"))
         {
             return true;
@@ -102,6 +110,16 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
+                if (colliderSecond.CompareTag("Box"))
+                {
+                    if (colliderThird == null || colliderThird.CompareTag("Switch"))
+                    {
+                        boxToMove = colliderFirst.transform;
+                        boxToMove2 = colliderSecond.transform;
+                        return true;
+                    }
+
+                }
                 return false;
             }
         }
