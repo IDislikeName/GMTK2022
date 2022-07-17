@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     public string currentLevelName;
 
+    public bool playerDead = false;
+
     #region SingletonDeclaration 
     public static GameManager instance;
     public static GameManager FindInstance()

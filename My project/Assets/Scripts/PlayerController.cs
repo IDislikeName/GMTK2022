@@ -139,12 +139,12 @@ public class PlayerController : MonoBehaviour
         {
             if (DeathCheckBasic(LeftPlayer.transform.position))
             {
-                LeftPlayer.GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 1); //这里就姑且用换颜色代替一下，等立绘出来了之后直接换立绘就好
+                LeftPlayer.GetComponent<SpriteRenderer>().color = new Color(0.8f, 0f, 0f, 1); 
                 return true;
             }
             else
             {
-                LeftPlayer.GetComponent<SpriteRenderer>().color = new Color(1f, 0f, 0f, 1); //这里就姑且用换颜色代替一下，等立绘出来了之后直接换立绘就好
+                LeftPlayer.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1); 
             }
             return false;
         }
@@ -153,12 +153,12 @@ public class PlayerController : MonoBehaviour
         {
             if (DeathCheckBasic(this.transform.position))
             {
-                this.GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 1); //这里就姑且用换颜色代替一下，等立绘出来了之后直接换立绘就好
+                this.GetComponent<SpriteRenderer>().color = new Color(0.8f, 0f, 0f, 1); 
                 return true;
             }
             else
             {
-                this.GetComponent<SpriteRenderer>().color = new Color(1f, 0f, 0f, 1); //这里就姑且用换颜色代替一下，等立绘出来了之后直接换立绘就好
+                this.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1);
             }
             return false;
         }
@@ -167,16 +167,18 @@ public class PlayerController : MonoBehaviour
         {
             if (DeathCheckBasic(RightPlayer.transform.position))
             {
-                RightPlayer.GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 1); //这里就姑且用换颜色代替一下，等立绘出来了之后直接换立绘就好
+                RightPlayer.GetComponent<SpriteRenderer>().color = new Color(0.8f, 0f, 0f, 1);
                 return true;
             }
             else
             {
-                RightPlayer.GetComponent<SpriteRenderer>().color = new Color(1f, 0f, 0f, 1); //这里就姑且用换颜色代替一下，等立绘出来了之后直接换立绘就好
+                RightPlayer.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1);
             }
             return false;
         }
-        
+
+        GameManager.instance.playerDead = false;
+
         switch (GameManager.instance.inWorldNumber)
         {
             case 1:
@@ -184,7 +186,7 @@ public class PlayerController : MonoBehaviour
                 DeathCheckRight();
                 if (DeathCheckLeft())
                 {
-                    print("Dead1");  //这里后面要换成切UI
+                    GameManager.instance.playerDead = true;  
                 }
                 break;
             case 2:
@@ -192,7 +194,7 @@ public class PlayerController : MonoBehaviour
                 DeathCheckRight();
                 if (DeathCheckMiddle())
                 {
-                    print("Dead2");  //这里后面要换成切UI
+                    GameManager.instance.playerDead = true;  
                 }
                 break;
             case 3:
@@ -200,7 +202,7 @@ public class PlayerController : MonoBehaviour
                 DeathCheckMiddle();
                 if (DeathCheckRight())
                 {
-                    print("Dead3");  //这里后面要换成切UI
+                    GameManager.instance.playerDead = true;  
                 }
                 break;
         }
@@ -219,6 +221,7 @@ public class PlayerController : MonoBehaviour
         }
         return null;
     }
+
     public void UpdateCollision()
     {
         if (GameManager.instance.inWorldNumber == 1)
