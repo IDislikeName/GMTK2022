@@ -13,8 +13,6 @@ public class GameManager : MonoBehaviour
 
     public int inWorldNumber = 2;
 
-    public string currentLevelName;
-
     public bool playerDead = false;
     public bool playerDeadLegacy = false;
     public bool playerCompleted = false;
@@ -120,7 +118,7 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene(currentLevelName);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     
     public void WorldSwitch(int Target)
