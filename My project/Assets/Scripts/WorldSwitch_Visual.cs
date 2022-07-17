@@ -16,6 +16,8 @@ public class WorldSwitch_Visual : MonoBehaviour
     public GameObject collectablesImage3;
     Dictionary<int, GameObject> collection;
 
+    public GameObject successUI;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,16 +52,18 @@ public class WorldSwitch_Visual : MonoBehaviour
                 break;
         }
         
-        // 在弹出死亡界面时移除右上角的按钮
+        // 弹出死亡界面，并在弹出死亡界面时移除右上角的按钮
         if (GameManager.instance.playerDead)
         {
             deathUI.SetActive(true);
             Buttons.SetActive(false);
+            freez(true);
         }
         else
         {
             deathUI.SetActive(false);
             Buttons.SetActive(true);
+            freez(false);
         }
 
         // 显示当前收集到的收集物
@@ -67,5 +71,14 @@ public class WorldSwitch_Visual : MonoBehaviour
         {
             collection[i].SetActive(GameManager.instance.collectablesGot[i]);
         }
+
+        successUI.SetActive(GameManager.instance.playerCompleted);
+    }
+
+    void freez(bool wantFreeze)
+    {
+        // 这个方法应当在有覆盖性的ui被激活时调用
+        // 用以冻结游戏画面
+        GameManager.instance.isFreez = wantFreeze;
     }
 }
