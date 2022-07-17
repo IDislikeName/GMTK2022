@@ -27,7 +27,6 @@ public class PlayerController : MonoBehaviour
 
         }
         DeathCheck();
-        UpdateCollision();
     }
 
     void MoveTo(Vector3 movementDirection)
@@ -64,6 +63,10 @@ public class PlayerController : MonoBehaviour
 
     bool CanMove(Vector3 direction)
     {
+        if (GameManager.instance.isFreez)
+        {
+            return false;
+        }
         Vector3 CurrentPosition = Vector3.zero;
 
         switch (GameManager.instance.inWorldNumber)  // 用这个判断来实现切换世界时使用不同的碰撞箱
@@ -221,13 +224,5 @@ public class PlayerController : MonoBehaviour
             }
         }
         return null;
-    }
-
-    public void UpdateCollision()
-    {
-        if (GameManager.instance.inWorldNumber == 1)
-        {
-            
-        }
     }
 }

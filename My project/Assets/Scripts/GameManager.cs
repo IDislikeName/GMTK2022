@@ -16,10 +16,13 @@ public class GameManager : MonoBehaviour
     public string currentLevelName;
 
     public bool playerDead = false;
+    public bool playerCompleted = false;
 
     public GameObject BackgoundUI;
 
     public Dictionary<int, bool> collectablesGot;
+
+    public bool isFreez;
 
     #region SingletonDeclaration 
     public static GameManager instance;
@@ -48,6 +51,9 @@ public class GameManager : MonoBehaviour
             {2, false},
             {3, false}
         };
+
+        // 初始化游戏冻结变量
+        isFreez = false;
     }
 
     private void Update()
@@ -118,9 +124,26 @@ public class GameManager : MonoBehaviour
     
     public void WorldSwitch(int Target)
     {
-        SaveWorldNumber();
-        //这个方法只应该被按钮调用
-        inWorldNumber = Target;
-        BackgoundUI.GetComponent<BackgroundSwitch>().BackgroundSwitchTo(Target);
+            SaveWorldNumber();
+            //这个方法只应该被按钮调用
+            inWorldNumber = Target;
+            BackgoundUI.GetComponent<BackgroundSwitch>().BackgroundSwitchTo(Target);
+    }
+
+    public void UpdateCollectableStatus(int collectable, bool status)
+    {
+        collectablesGot[collectable] = status;
+
+        // 检查是否完成收集物的收集
+        for (int i = 1; i < 4; i++)
+        {
+            if (!collectablesGot[i])
+            {
+                playerCompleted = false;
+                return;
+            }
+            
+        }
+        playerCompleted = true;
     }
 }

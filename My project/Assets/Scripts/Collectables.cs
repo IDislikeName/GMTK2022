@@ -25,21 +25,21 @@ public class Collectables : MonoBehaviour
                 case "PlayerMiddle":
                     if(GameManager.instance.inWorldNumber == 2)
                     {
-                        GameManager.instance.collectablesGot[CollectablesType] = true;
+                        GameManager.instance.UpdateCollectableStatus(CollectablesType, true);
                         Destroy(this.gameObject);
                     }
                     break;
                 case "PlayerLeft":
                     if (GameManager.instance.inWorldNumber == 1)
                     {
-                        GameManager.instance.collectablesGot[CollectablesType] = true;
+                        GameManager.instance.UpdateCollectableStatus(CollectablesType, true);
                         Destroy(this.gameObject);
                     }
                     break;
                 case "PlayerRight":
                     if (GameManager.instance.inWorldNumber == 3)
                     {
-                        GameManager.instance.collectablesGot[CollectablesType] = true;
+                        GameManager.instance.UpdateCollectableStatus(CollectablesType, true);
                         Destroy(this.gameObject);
                     }
                     break;
@@ -56,7 +56,14 @@ public class Collectables : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.instance.collectablesGot[CollectablesType] = false;
+        try
+        {
+            GameManager.instance.UpdateCollectableStatus(CollectablesType, false);
+        }
+        catch
+        {
+            // 这里初始化的时候因为onEable好像在GameManager变Instance之前就会调用了，所以用个try把这个排掉，catch不做操作。
+        }
     }
 
 }
