@@ -221,6 +221,9 @@ public class PlayerController : MonoBehaviour
     }
     public void UpdateCollision()
     {
-
+        if (GameManager.instance.inWorldNumber == 1)
+        {
+            
+        }
     }
 }
