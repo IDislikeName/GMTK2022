@@ -8,11 +8,13 @@ public class WorldSwitch_Visual : MonoBehaviour
     public GameObject cover2;
     public GameObject cover3;
 
+    public GameObject deathUI;
+
     int playerStatus;
     // Start is called before the first frame update
     void Start()
     {
-        
+        deathUI.SetActive(false);
     }
 
     // Update is called once per frame
@@ -36,6 +38,15 @@ public class WorldSwitch_Visual : MonoBehaviour
             cover1.SetActive(true);
             cover2.SetActive(true);
             cover3.SetActive(false);
+        }
+
+        if (GameManager.instance.playerDead)
+        {
+            deathUI.SetActive(true);
+        }
+        else
+        {
+            deathUI.SetActive(false);
         }
     }
 }
