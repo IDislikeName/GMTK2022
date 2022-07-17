@@ -6,6 +6,13 @@ public class Switch : MonoBehaviour
 {
     public LayerMask lm;
     public bool on = false;
+    public Sprite pressed;
+    public Sprite notpressed;
+    public SpriteRenderer sr;
+    private void Start()
+    {
+        sr = GetComponent<SpriteRenderer>();
+    }
     private void Update()
     {
         Collider2D col = GetColliderAt(transform.position);
@@ -14,10 +21,12 @@ public class Switch : MonoBehaviour
             if (col.tag=="Box")
             {
                 on = true;
+                sr.sprite = pressed;
             }
             else
             {
                 on = false;
+                sr.sprite = notpressed;
             }
         }
     }
