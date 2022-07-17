@@ -27,7 +27,6 @@ public class PlayerController : MonoBehaviour
 
         }
         DeathCheck();
-        UpdateCollision();
     }
 
     void MoveTo(Vector3 movementDirection)
@@ -225,13 +224,5 @@ public class PlayerController : MonoBehaviour
             }
         }
         return null;
-    }
-
-    public void UpdateCollision()
-    {
-        if (GameManager.instance.inWorldNumber == 1)
-        {
-            
-        }
     }
 }
