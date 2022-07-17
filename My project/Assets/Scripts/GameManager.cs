@@ -147,4 +147,14 @@ public class GameManager : MonoBehaviour
         }
         playerCompleted = true;
     }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
+
+    public void ForTheWorthy()
+    {
+        SceneManager.LoadScene("lv3.2");
+    }
 }
