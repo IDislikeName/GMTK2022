@@ -69,7 +69,7 @@ public class WorldSwitch_Visual : MonoBehaviour
         // 显示当前收集到的收集物
         for (int i = 1; i < 4; i++)
         {
-            collection[i].SetActive(GameManager.instance.collectablesGot[i]);
+                collection[i].SetActive(GameManager.instance.collectablesGot[i]);
         }
 
         successUI.SetActive(GameManager.instance.playerCompleted);
