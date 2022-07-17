@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
         if (boxToMove != null)
         {
             boxToMove.transform.position += movementDirection;
+            SoundManager.instance.PlayClip(SoundManager.instance.boxpush);
         }
     }
 

@@ -16,7 +16,24 @@ public class Switches : MonoBehaviour
     void Update()
     {
         activated = CheckActivation();
-        door.SetActive(!activated);
+        if (door.activeInHierarchy)
+        {
+            if (activated)
+            {
+                door.SetActive(false);
+                SoundManager.instance.PlayClip(SoundManager.instance.togglespikes);
+            }
+                
+        }
+        else
+        {
+            if (!activated)
+            {
+                door.SetActive(true);
+                SoundManager.instance.PlayClip(SoundManager.instance.togglespikes);
+            }
+                
+        }
     }
     public bool CheckActivation()
     {

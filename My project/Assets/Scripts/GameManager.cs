@@ -128,6 +128,7 @@ public class GameManager : MonoBehaviour
             SaveWorldNumber();
             //这个方法只应该被按钮调用
             inWorldNumber = Target;
+            SoundManager.instance.PlayClip(SoundManager.instance.changeworld);
             BackgoundUI.GetComponent<BackgroundSwitch>().BackgroundSwitchTo(Target);
     }
 

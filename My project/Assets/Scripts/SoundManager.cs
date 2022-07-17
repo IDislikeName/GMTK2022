@@ -26,6 +26,10 @@ public class SoundManager : MonoBehaviour
     #endregion
     public AudioSource aud;
     public AudioSource BGM;
+    public AudioClip boxpush;
+    public AudioClip togglespikes;
+    public AudioClip changeworld;
+    public AudioClip death;
     // Start is called before the first frame update
     void Start()
     {

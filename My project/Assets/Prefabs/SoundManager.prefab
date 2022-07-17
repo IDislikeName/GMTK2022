@@ -48,6 +48,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aud: {fileID: 112972554625813557}
   BGM: {fileID: 112972554625813558}
+  boxpush: {fileID: 8300000, guid: 3bc68ffaa24cf2f4d8e71712050c73a7, type: 3}
+  togglespikes: {fileID: 8300000, guid: fee07555b68ec8f40ae6ed1235cabb94, type: 3}
+  changeworld: {fileID: 8300000, guid: bcecd88bfc3775a4c972f9dd4ccf1eb7, type: 3}
+  death: {fileID: 8300000, guid: fef7f9f88e544c44cb2eaa348012849d, type: 3}
 --- !u!82 &112972554625813557
 AudioSource:
   m_ObjectHideFlags: 0
