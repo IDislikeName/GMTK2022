@@ -2908,7 +2908,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae848ab17fbab284bbe94c52ce802c06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  door: {fileID: 1729389170}
+  door: {fileID: 131506644}
   activated: 0
 --- !u!4 &1065405017
 Transform:
