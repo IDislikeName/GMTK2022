@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
     GameObject LeftPlayer;
     GameObject RightPlayer;
 
-    public LayerMask Filter;
     void Awake()
     {
         LeftPlayer = findChildWithTag(this.gameObject, "PlayerLeft");
@@ -119,6 +118,7 @@ public class PlayerController : MonoBehaviour
         Collider2D GetColliderAtSpecifiedLayer(Vector3 position)
         {
             RaycastHit2D hit;
+            LayerMask Filter = LayerMask.GetMask("HardBlock", "Pushables");
             hit = Physics2D.CircleCast(position, .3f, Vector3.zero, .3f, Filter);
             return hit.collider;
         }
