@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
 
     public bool playerDead = false;
 
+    public GameObject BackgoundUI;
+
     #region SingletonDeclaration 
     public static GameManager instance;
     public static GameManager FindInstance()
@@ -35,18 +37,14 @@ public class GameManager : MonoBehaviour
             //DontDestroyOnLoad(this);
             instance = this;
         }
+
+        //init game
+        WorldSwitch(2);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            UnDo();
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Restart();
-        }
+
     }
     #endregion
 
@@ -105,7 +103,7 @@ public class GameManager : MonoBehaviour
 
     //以上实现了Undo。
 
-    void Restart()
+    public void Restart()
     {
         SceneManager.LoadScene(currentLevelName);
     }
@@ -115,5 +113,6 @@ public class GameManager : MonoBehaviour
         SaveWorldNumber();
         //这个方法只应该被按钮调用
         inWorldNumber = Target;
+        BackgoundUI.GetComponent<BackgroundSwitch>().BackgroundSwitchTo(Target);
     }
 }
