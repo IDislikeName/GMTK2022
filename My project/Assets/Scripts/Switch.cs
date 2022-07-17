@@ -29,33 +29,8 @@ public class Switch : MonoBehaviour
                 // 这里是为了实现让人物踩上去也能把门打开的效果。
                 if(col.gameObject.layer == 11)
                 {
-                    switch (GameManager.instance.inWorldNumber)
-                    {
-                        case 1:
-                            if (col.CompareTag("PlayerLeft"))
-                            {
-                                on = true;
-                                sr.sprite = pressed;
-                            }
-                            break;
-                        
-                        case 2:
-                            if (col.CompareTag("PlayerMiddle"))
-                            {
-                                on = true;
-                                sr.sprite = pressed;
-                            }
-                            break;
-                        
-                        case 3:
-                            if (col.CompareTag("PlayerRight"))
-                            {
-                                on = true;
-                                sr.sprite = pressed;
-                            }
-                            break;
-                    }
-
+                on = true;
+                sr.sprite = pressed;
                 }
             }
         }
