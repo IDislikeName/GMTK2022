@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject BackgoundUI;
 
+    public Dictionary<int, bool> collectablesGot;
+
     #region SingletonDeclaration 
     public static GameManager instance;
     public static GameManager FindInstance()
@@ -40,6 +42,12 @@ public class GameManager : MonoBehaviour
 
         //init game
         WorldSwitch(2);
+        // 存收集物收集情况，收集到之后对应序号变为true。
+        collectablesGot = new() {
+            {1, false},
+            {2, false},
+            {3, false}
+        };
     }
 
     private void Update()

@@ -65,17 +65,18 @@ public class PlayerController : MonoBehaviour
     bool CanMove(Vector3 direction)
     {
         Vector3 CurrentPosition = Vector3.zero;
-        if (GameManager.instance.inWorldNumber == 2)
+
+        switch (GameManager.instance.inWorldNumber)  // 用这个判断来实现切换世界时使用不同的碰撞箱
         {
-            CurrentPosition = this.transform.position;
-        }
-        else if (GameManager.instance.inWorldNumber == 1)
-        {
-            CurrentPosition = LeftPlayer.transform.position;
-        }
-        else
-        {
-            CurrentPosition = RightPlayer.transform.position;
+            case 1:
+                CurrentPosition = LeftPlayer.transform.position;
+                break;
+            case 2:
+                CurrentPosition = this.transform.position;
+                break;
+            case 3:
+                CurrentPosition = RightPlayer.transform.position;
+                break;
         }
 
 
@@ -83,13 +84,13 @@ public class PlayerController : MonoBehaviour
         Collider2D colliderFirst = GetColliderAt(positionToCheckFirst);
         Vector3 positionToCheckSecond = positionToCheckFirst + direction;
         Collider2D colliderSecond = GetColliderAt(positionToCheckSecond);
-        if (colliderFirst == null)
+        if (colliderFirst == null || colliderFirst.CompareTag("Collectables"))
         {
             return true;
         }
-        else if (colliderFirst.tag == "Box")
+        else if (colliderFirst.CompareTag("Box"))
         {
-            if (colliderSecond == null|| colliderSecond.tag =="Switch")
+            if (colliderSecond == null || colliderSecond.CompareTag("Switch"))
             {
                 boxToMove = colliderFirst.transform;
                 return true;

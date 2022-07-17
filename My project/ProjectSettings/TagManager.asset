@@ -10,6 +10,7 @@ TagManager:
   - PlayerRight
   - PlayerMiddle
   - Switch
+  - Collectables
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - Walls
   - Pushables
   - HardBlock
-  - 
-  - 
+  - Collectables
+  - Players
   - 
   - 
   - 
@@ -46,4 +47,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Walls
+    uniqueID: 942668033
+    locked: 0
+  - name: Collectables
+    uniqueID: 186750431
+    locked: 0
+  - name: Switches
+    uniqueID: 531054277
+    locked: 0
+  - name: Boxes
+    uniqueID: 2600317285
+    locked: 0
+  - name: Players
+    uniqueID: 348557569
     locked: 0
