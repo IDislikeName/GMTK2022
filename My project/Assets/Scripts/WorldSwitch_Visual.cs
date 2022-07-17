@@ -21,24 +21,23 @@ public class WorldSwitch_Visual : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerStatus = GameManager.instance.inWorldNumber;
-        if (playerStatus == 1)
+        switch (GameManager.instance.inWorldNumber)
         {
-            cover1.SetActive(false);
-            cover2.SetActive(true);
-            cover3.SetActive(true);
-        }
-        else if (playerStatus == 2)
-        {
-            cover1.SetActive(true);
-            cover2.SetActive(false);
-            cover3.SetActive(true);
-        }
-        else
-        {
-            cover1.SetActive(true);
-            cover2.SetActive(true);
-            cover3.SetActive(false);
+            case 1:
+                cover1.SetActive(true);
+                cover2.SetActive(false);
+                cover3.SetActive(false);
+                break;
+            case 2:
+                cover1.SetActive(false);
+                cover2.SetActive(true);
+                cover3.SetActive(false);
+                break;
+            case 3:
+                cover1.SetActive(false);
+                cover2.SetActive(false);
+                cover3.SetActive(true);
+                break;
         }
 
         if (GameManager.instance.playerDead)
